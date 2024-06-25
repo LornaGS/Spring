@@ -1,6 +1,14 @@
-package com.qa.lbg.domain;
+package com.qa.domain;
+//
+import jakarta.persistence.*;
 
+//
+@Entity // flags the class as a db entity
 public class Cat {
+
+    @Id // flags the field as a PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // makes the field AUTO_INCREMENT
+    private Integer id;
 
     private String name;
 
@@ -12,19 +20,27 @@ public class Cat {
 
     private int lives;
 
+    // REQUIRED
     public Cat() {
         super();
     }
 
-    public Cat(String name, String colour, int age, String nature, int lives) {
-        super();
+    public Cat(Integer id, String name, String colour, int age, String nature, int lives) {
+        this.id = id;
         this.name = name;
         this.colour = colour;
         this.age = age;
         this.nature = nature;
         this.lives = lives;
     }
+    // REQUIRED
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

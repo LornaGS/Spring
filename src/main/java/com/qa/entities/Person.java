@@ -1,8 +1,16 @@
 package com.qa.entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Person {
 
-    private String name, job;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //make the field AUTO_INCREMENT
+    private Integer id;
+   @Column(name="full_name", nullable =false, unique=true)
+   private String name;
+   private  String job;
     private int age;
 
 
@@ -10,6 +18,10 @@ public class Person {
         this.name = name;
         this.job = job;
         this.age = age;
+    }
+
+    public Person() {
+        super();
     }
 
     public String getName() {

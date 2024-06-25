@@ -2,6 +2,7 @@ package com.qa.rest;
 
 
 import com.qa.entities.Person;
+import com.qa.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,26 +13,32 @@ import java.util.List;
 @RestController
 public class PersonControlller {
 
-    private List<Person> people = new ArrayList<>();
+    private PersonService service;
+
+    public PersonControlller(PersonService service, List<Person> people) {
+        this.service = service;
+
+    }
+
+
 
     @GetMapping("/getAll")
     public List<Person> getAll() {
 
-        return this.people;
+        return this.service.getAll();
     }
     @PostMapping("/create")
     public Person createPerson(@RequestBody Person person){
 
-        this.people.add(person);
 
-        return this.people.get(this.people.size() - 1);
+        return this.service.createPerson(person);
 
     }
 
     @DeleteMapping("/remove/{id}")
     public Person removePerson(@PathVariable int id){
-        Person toRemove = this.people.get(id);
-        return this.people.remove(id);
+
+        return this.service.removePerson(id);
 
     }
 
@@ -40,13 +47,9 @@ public class PersonControlller {
                                @RequestParam(name="name", required = false) String name,
                                @RequestParam(name="age", required = false) Integer age,
                                @RequestParam(name="job", required = false) String job){
-    Person toUpdate = this.people.get(id);
 
-    if (name != null) toUpdate.setName(name);
-    if (age != null) toUpdate.setAge(age);
-    if (job != null) toUpdate.setJob(job);
 
-    return toUpdate;
+    return this.service.updatePerson(id, name, age, job);
     }
 
 //    @PostMapping("/people/new")
