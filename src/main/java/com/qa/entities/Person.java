@@ -24,6 +24,13 @@ public class Person {
         super();
     }
 
+    public Person(Integer id, String name, String job, int age) {
+        this.id = id;
+        this.name = name;
+        this.job = job;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }

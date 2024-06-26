@@ -13,10 +13,6 @@ public class LbgSpring2Application {
 		SpringApplication.run(LbgSpring2Application.class, args);
 	}
 
-	@GetMapping("/hello")
-		public String greeting(){
 
-		return "Hello, World!";
-	}
 
 }

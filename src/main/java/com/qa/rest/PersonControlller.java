@@ -20,7 +20,8 @@ public class PersonControlller {
 
     }
 
-
+    @GetMapping("get/{id}")
+    public Person get(@PathVariable int id) {return this.service.get(id);}
 
     @GetMapping("/getAll")
     public List<Person> getAll() {
